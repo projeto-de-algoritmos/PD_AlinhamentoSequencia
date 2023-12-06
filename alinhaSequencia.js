@@ -1,4 +1,4 @@
-function alinhaStrings(stringA, stringB, valorGap=2, valorMismatch=3){
+function inicializaMatriz(stringA, stringB, valorGap){
    let matriz = new Array(stringA.length+1).fill().map(_ => new Array(stringA.length+1).fill(0))
 
    //Inicializa primeira coluna
@@ -10,5 +10,10 @@ function alinhaStrings(stringA, stringB, valorGap=2, valorMismatch=3){
    for(let j = 0; j <= stringA.length; j++){
       matriz[0][j] = valorGap * j;
    }
-   console.log(matriz)
+
+   return matriz;
+}
+
+function alinhaStrings(stringA, stringB, valorGap=2, valorMismatch=3){
+   let matriz = inicializaMatriz(stringA, stringB, valorGap);
 }
