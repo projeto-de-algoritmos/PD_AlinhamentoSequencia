@@ -1,0 +1,80 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    height: 100vh; 
+    padding: 10rem;
+    background-image: url('https://static.imasters.com.br/wp-content/uploads/2018/03/gtaa.jpg');
+    background-size: cover; 
+    background-position: center center;
+    backdrop-filter: blur(7px);
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30rem;
+    height: 22rem;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: white;
+    background-color: rgb(11, 97, 97);
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.8);
+}
+
+.main-container > h1{
+    margin-bottom: 1rem;
+}
+
+#Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#Form > input{
+    padding: 0.5rem;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#Form > input:focus{
+    border-color: rgb(116, 244, 244);
+    outline: none;
+}
+
+#Form > button{
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(116, 244, 244);
+    cursor: pointer;
+}
+
+#Form > button:hover{
+    background-color: brown;
+}
+
+.reponse-container{
+    width: 100%;
+    height: 100%;
+    margin: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem 0 0.5rem  ;
+    background-color: white;
+    color:black;
+    font-weight: bolder;
+}
+
+.strings{
+    letter-spacing: 5px;
+}

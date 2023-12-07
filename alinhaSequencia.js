@@ -130,11 +130,21 @@ function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanh
          peso += valorGap
       }
    }
-   imprimirAoContrario(resultadoHorizontal)
-   imprimirAoContrario(resultadoVertical)
-   
-   console.log(peso)
-   
+
+   let SequenciaAlinhada = `
+   <div>
+       <p class="strings">${imprimirAoContrario(resultadoVertical)}</p>
+       <p class="strings">${imprimirAoContrario(resultadoHorizontal)}</p>
+       <span>Peso: ${peso}</span>
+   </div>
+   `;
+
+   responseAlinhamento(SequenciaAlinhada);
+}
+
+function responseAlinhamento(html){
+   let resposta = document.getElementById('Response');
+   resposta.innerHTML = html;
 }
 
 function imprimirAoContrario(str) {
@@ -150,8 +160,8 @@ function imprimirAoContrario(str) {
 
 
    // Imprime a string ao contrário
-   console.log(strAoContrario);
- }
+   return strAoContrario;
+}
 
 function alinhaStrings(stringVertical, stringHorizontal, valorGap = 2, valorMismatch = 3){
    let matriz = inicializaMatriz(stringVertical, valorGap);
@@ -161,13 +171,23 @@ function alinhaStrings(stringVertical, stringHorizontal, valorGap = 2, valorMism
    for(let linha = 0; linha < matriz.length; linha++){
       console.log(`[${matriz[linha]}]`);
       
-}
+   }
 
    console.log('\n')
 
    findSolution(matriz, stringHorizontal, stringVertical, stringHorizontal.length, stringVertical.length, valorGap, valorMismatch);
 }
 
-alinhaStrings("ACACTAG", "CTAGACA")
+function alinharSequencias() {
+   // Obter os valores dos inputs
+   var seq1 = document.getElementById('sequence1');
+   var seq2 = document.getElementById('sequence2');
+
+   // Chamar a função alinhaStrings com os valores obtidos
+   alinhaStrings(seq1.value, seq2.value);
+
+   seq1.value = ""
+   seq2.value = ""
+}
 // CTACCG = String na Vertical
 // TACATG = String na Horizontal
