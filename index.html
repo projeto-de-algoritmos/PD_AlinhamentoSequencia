@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alinhando sequencia</title>
+    <title>Alinhador de Palavras</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
 </head>
 <body>
     <div class="main-container">
-        <h1> Alinhamento de sequência</h1>
+        <h1> Alinhador de Palavras</h1>
+        <h2>Descubra o custo de alinhar duas palavras diferentes!</h2>
         <div class="form-container">
-            <form id="Form">
-                <label> String X</label>
+            <form id="Form" class="form">
+                <label> Primeira Palavra</label>
                 <input type="text" id="sequence1" name="sequence1" required>
-                <label> String Y</label>
+                <label> Segunda Palavra</label>
                 <input type="text" id="sequence2" name="sequence2" required>
                 <button type="button" onclick="alinharSequencias()">Alinhar Sequências</button>
             </form>
         </div>
+        <span class="warning">Observação: As palavras devem ter tamanhos iguais!</span>
         <div class="reponse-container">
             <div id="Response">
             </div>
@@ -25,4 +28,5 @@
     </div>
     <script src="./alinhaSequencia.js"></script>
 </body>
-</html>
+</html>   
+ <link rel="icon" type="image/x-icon" href="favicon.ico" />

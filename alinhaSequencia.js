@@ -1,3 +1,5 @@
+let htmlHorizontal='', htmlVertical='';
+
 function inicializaMatriz(stringVertical, valorGap){
    let matriz = new Array(stringVertical.length+1).fill().map(_ => new Array(stringVertical.length+1).fill(0))
 
@@ -46,9 +48,11 @@ function preencheMatriz(matriz, stringVertical, stringHorizontal, valorGap, valo
 }
 
 function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanhoV, valorGap, valorMismatch){
-   let resultadoHorizontal='', resultadoVertical='', peso = 0;
+   let resultadoHorizontal='', resultadoVertical='', SequenciaAlinhada;
    let indiceHorizontal = tamanhoH, indiceVertical = tamanhoV;
    let linha = matriz.length, coluna = matriz.length;
+   let  peso = 0, contadorMismatch = 0, contadorGap = 0;
+
    while(linha != 0 && coluna != 0){
 
       if(stringHorizontal[indiceHorizontal] === stringVertical[indiceVertical]){
@@ -82,6 +86,7 @@ function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanh
             indiceHorizontal--;
             indiceVertical--;
          
+            contadorMismatch++;
          }
 
          else if(gapHorizontal == Math.min(gapVertical, gapHorizontal, mismatch)){
@@ -97,6 +102,8 @@ function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanh
             linha--;
             indiceHorizontal--;
 
+            contadorGap++;
+
          }
 
          else if(gapVertical == Math.min(gapVertical, gapHorizontal, mismatch)){
@@ -111,6 +118,7 @@ function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanh
             coluna--;
             indiceVertical--;
 
+            contadorGap++;
          }
       }
    }
@@ -131,13 +139,33 @@ function findSolution(matriz, stringHorizontal, stringVertical, tamanhoH, tamanh
       }
    }
 
-   let SequenciaAlinhada = `
-   <div>
-       <p class="strings">${imprimirAoContrario(resultadoVertical)}</p>
-       <p class="strings">${imprimirAoContrario(resultadoHorizontal)}</p>
-       <span>Peso: ${peso}</span>
-   </div>
-   `;
+   resultadoHorizontal = imprimirAoContrario(resultadoHorizontal);
+   resultadoVertical = imprimirAoContrario(resultadoVertical);
+
+   if(peso == 0){
+      SequenciaAlinhada = `
+      <div>
+         <div class="container-string">
+            <p class="strings no-weigth">${resultadoHorizontal}</p>
+         </div>
+         <div class="container-string">
+            <p class="strings no-weigth">${resultadoVertical}</p>
+         </div>
+         <span class=no-weigth>Sem custo!</span>
+      </div>
+      `;
+   }
+   else{
+      estilizaString(resultadoHorizontal, resultadoVertical)
+
+      SequenciaAlinhada = `
+      <div>
+          <div class="container-string">${htmlHorizontal}</div>
+          <div class="container-string">${htmlVertical}</div>
+          <span class=weigth>Custo ${peso}!</span>
+      </div>
+      `;
+   }
 
    responseAlinhamento(SequenciaAlinhada);
 }
@@ -157,37 +185,71 @@ function imprimirAoContrario(str) {
    // Une os caracteres novamente em uma string
    let strAoContrario = caracteresAoContrario.join('');
  
-
-
    // Imprime a string ao contrário
    return strAoContrario;
 }
+
+function estilizaString(resultadoHorizontal, resultadoVertical){
+   for(let i = 0; i < resultadoHorizontal.length; i++){
+      if(resultadoHorizontal[i] == resultadoVertical[i]){
+         htmlHorizontal += `<span class=no-weigth strings>${resultadoHorizontal[i]}</span>` 
+         htmlVertical += `<span class=no-weigth strings>${resultadoVertical[i]}</span>` 
+      }
+      else{
+         if(resultadoHorizontal[i] == '-' || resultadoVertical[i] == '-'){
+            htmlHorizontal += `<span class=gap strings>${resultadoHorizontal[i]}</span>` 
+            htmlVertical += `<span class=gap strings >${resultadoVertical[i]}</span>` 
+         }
+         else{
+            htmlHorizontal += `<span class=weigth strings>${resultadoHorizontal[i]}</span>` 
+            htmlVertical += `<span class=weigth strings>${resultadoVertical[i]}</span>` 
+         }
+         }
+   }
+}
+
 
 function alinhaStrings(stringVertical, stringHorizontal, valorGap = 2, valorMismatch = 3){
    let matriz = inicializaMatriz(stringVertical, valorGap);
 
    preencheMatriz(matriz, stringVertical, stringHorizontal, valorGap, valorMismatch);
 
-   for(let linha = 0; linha < matriz.length; linha++){
-      console.log(`[${matriz[linha]}]`);
+   // for(let linha = 0; linha < matriz.length; linha++){
+   //    console.log(`[${matriz[linha]}]`);
       
-   }
+   // }
 
-   console.log('\n')
+   // console.log('\n')
 
    findSolution(matriz, stringHorizontal, stringVertical, stringHorizontal.length, stringVertical.length, valorGap, valorMismatch);
 }
 
 function alinharSequencias() {
    // Obter os valores dos inputs
-   var seq1 = document.getElementById('sequence1');
-   var seq2 = document.getElementById('sequence2');
+   let seq1 = document.getElementById('sequence1').value.trim();
+   let seq2 = document.getElementById('sequence2').value.trim();
+
+   //Se algum campo está vazio, alertar.
+   if(seq1.length == 0 || seq2.length == 0){
+      alert("Ambos os campos devem ter palavras!");
+   }
+
+   //Se as palavras não tem o mesmo tamanho, alertar.
+   else if(seq1.length != seq2.length){
+      alert("As palavras devem ter o mesmo tamanho!");
+   }
 
    // Chamar a função alinhaStrings com os valores obtidos
-   alinhaStrings(seq1.value, seq2.value);
+   else{
+      alinhaStrings(seq1, seq2);
+   
+      seq1.value = ""
+      seq2.value = ""
 
-   seq1.value = ""
-   seq2.value = ""
+      htmlVertical=''
+      htmlHorizontal=''
+
+   }
 }
 // CTACCG = String na Vertical
 // TACATG = String na Horizontal
