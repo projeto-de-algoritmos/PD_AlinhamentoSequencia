@@ -25,10 +25,15 @@ Dadas duas palavras informadas pelo usuário, o projeto executa o algoritmo para
 
 Ao final do processo, é exibido na tela as sequências resultantes e o custo total da operação.
 
-Foi gravado um vídeo explicando melhor o projeto e mostrando ele em funcionamento. [Clique aqui para assistir pelo YouTube](). O vídeo também se encontra no repositório.
+Foi gravado um vídeo explicando melhor o projeto e mostrando ele em funcionamento. [Clique aqui para assistir pelo YouTube](https://youtu.be/uAK-zHGWd10). O vídeo também se encontra no repositório.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+![](./assets/screenshots/Foto1.png)
+
+![](./assets/screenshots/Foto2.png)
+
+![](./assets/screenshots/Foto3.png)
 
 ## Instalação 
 **Linguagem**: JavaScript<br>
